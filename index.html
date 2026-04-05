@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiFi/IoT Deployment Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="ui-container">
+        <div class="panel header-panel">
+            <h1>Deployment Planner</h1>
+            <p>Model physical spaces and simulate dynamic network hardware topography.</p>
+        </div>
+        <div class="panel controls-panel">
+            <div class="tool-modes">
+                <button id="modeDragBtn" class="btn btn-outline active">Pan / Move</button>
+                <button id="modeDrawBtn" class="btn btn-outline">Draw Region</button>
+            </div>
+
+            <button id="addRouterBtn" class="btn btn-primary">Drop Router Node</button>
+            <button id="clearRoutersBtn" class="btn btn-danger">Clear Project</button>
+            <button id="fillAreaBtn" class="btn btn-success" style="display:none;">Auto-Deploy to Region</button>
+
+            <div class="slider-container">
+                <label for="freqSelect">Operating Frequency Band</label>
+                <select id="freqSelect" class="form-select">
+                    <option value="2.4">2.4 GHz (Long Range, High Interference)</option>
+                    <option value="5">5 GHz (Short Range, Low Interference)</option>
+                </select>
+
+                <label for="radiusSlider">Hardware Base Signal Power</label>
+                <input type="range" id="radiusSlider" min="100" max="1500" value="500">
+            </div>
+
+            <div class="router-list-panel">
+                <h4>Active Deployment Nodes</h4>
+                <div id="routerListContainer" class="router-list-container">
+                    <!-- JS driven list -->
+                </div>
+            </div>
+
+            <div class="stats-panel">
+                <h4>Coverage Snapshot</h4>
+                <div class="stat-row">Optimal Signal: <span id="statOptimal" class="optimal-text">0%</span></div>
+                <div class="stat-row">Weak Signal: <span id="statWeak" class="weak-text">0%</span></div>
+                <div class="stat-row">Interference: <span id="statInterfere" class="interference-text">0%</span></div>
+                <div class="stat-row">Dead Zone: <span id="statDead" class="dead-text">100%</span></div>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item"><span class="color-box optimal"></span> Optimal Connection</div>
+                <div class="legend-item"><span class="color-box weak"></span> Weak Connection</div>
+                <div class="legend-item"><span class="color-box interference"></span> Interference Zones</div>
+                <div class="legend-item"><span class="color-box dead"></span> No Connection</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="canvas-container">
+        <div id="map"></div>
+    </div>
+
+    <!-- Leaflet & p5 Libraries -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
